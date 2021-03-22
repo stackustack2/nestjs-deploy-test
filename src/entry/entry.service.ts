@@ -40,7 +40,7 @@ export class EntrysService {
         return this.entryRepository.save(newEntry)
     }
 
-    @Cron('*/1 * * * *') // Every 28th minute (also to keep Heroku from idling)
+    // @Cron('*/1 * * * *') // Every 28th minute (also to keep Heroku from idling)
     async handleCron() {
         this.logger.log('=== RUNNIN CRON JOB ===')
 
