@@ -40,25 +40,26 @@ export class EntrysService {
         return this.entryRepository.save(newEntry)
     }
 
-    @Cron('*/20 * * * *') // Every 28th minute (also to keep Heroku from idling)
+    @Cron('*/1 * * * *') // Every 28th minute (also to keep Heroku from idling)
     async handleCron() {
+        this.logger.log('=== RUNNIN CRON JOB ===')
 
-        const newEntry = new Entry();
-        const PRICE = ".ty-product-block__price-actual .ty-price-update .ty-price bdi .ty-price-num:first-of-type"
-        const dateStamp = new Date().toISOString()
+        // const newEntry = new Entry();
+        // const PRICE = ".ty-product-block__price-actual .ty-price-update .ty-price bdi .ty-price-num:first-of-type"
+        // const dateStamp = new Date().toISOString()
 
-        const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
-        const page = await browser.newPage();
-        await page.goto('https://www.riskmadeinwarsaw.com/en/clothes-category/blouses/pure-bliss-long-sleeve-art-blue');
+        // const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+        // const page = await browser.newPage();
+        // await page.goto('https://www.riskmadeinwarsaw.com/en/clothes-category/blouses/pure-bliss-long-sleeve-art-blue');
 
-        const price = await page.evaluate((PRICE) => {
-            return document
-                .querySelector(PRICE)
-                .textContent
-        }, PRICE);
+        // const price = await page.evaluate((PRICE) => {
+        //     return document
+        //         .querySelector(PRICE)
+        //         .textContent
+        // }, PRICE);
 
-        await browser.close();
+        // await browser.close();
 
-        newEntry.entry = `[Created by CRON] Price at ${dateStamp}: ${price.toString()}PLN`
+        // newEntry.entry = `[Created by CRON] Price at ${dateStamp}: ${price.toString()}PLN`
     }
 }
