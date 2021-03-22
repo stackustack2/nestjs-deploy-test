@@ -32,7 +32,7 @@ export class EntrysService {
 
         await browser.close();
 
-        newEntry.entry = `Price at dateStamp: ${price.toString()}`
+        newEntry.entry = `Price at ${dateStamp}: ${price.toString()}PLN`
 
         return this.entryRepository.save(newEntry)
     }
