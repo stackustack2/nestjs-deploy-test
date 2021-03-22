@@ -61,5 +61,6 @@ export class EntrysService {
         await browser.close();
 
         newEntry.entry = `[Created by CRON] Price at ${dateStamp}: ${price.toString()}PLN`
+        return this.entryRepository.save(newEntry)
     }
 }
